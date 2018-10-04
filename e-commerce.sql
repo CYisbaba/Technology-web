@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le :  jeu. 04 oct. 2018 à 21:34
+-- Généré le :  jeu. 04 oct. 2018 à 21:54
 -- Version du serveur :  10.1.36-MariaDB
 -- Version de PHP :  7.2.10
 
@@ -57,10 +57,11 @@ CREATE TABLE `produit` (
 CREATE TABLE `user` (
   `user_id` int(11) NOT NULL,
   `username` varchar(20) NOT NULL,
-  `age` int(11) NOT NULL,
+  `age` int(11) DEFAULT NULL,
   `sex` int(11) NOT NULL,
   `email` varchar(20) NOT NULL,
-  `birthday` date NOT NULL
+  `birthday` date NOT NULL,
+  `pwd` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
