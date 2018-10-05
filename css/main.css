@@ -1,0 +1,138 @@
+html
+{
+    background-color: white;
+}
+
+.body {
+	height: 100%;
+	width: 100%;
+	z-index:-1;
+	background-attachment: fixed;
+	background-position: center center;
+	background-size: cover;
+	background-repeat: no-repeat;
+	margin:0px;
+	padding: 0px;
+	border:0;
+}
+
+#header
+{
+    text-align: center;
+    background-color: red;
+	margin: 0px auto;
+	padding: 0px;
+	height: 100px;
+	width: 1000px;
+	font-size:50px;
+	text-decoration:none;
+}
+
+#content {
+	background-color: 9999CC;
+	margin: 0px auto;
+	padding: 0px;
+	height: 600px;
+	width: 1000px;  
+   /* background:rgba(0,0,0,0.6);  */
+    filter:Alpha(opacity=60); 
+ }
+ 
+#content p,
+#content div,
+#content img,
+#content nav,
+#content first,
+#content video{  
+    position:relative; 
+}  
+
+#footer {
+	background-color: #FFF;
+	margin: 0px auto;
+	padding: 0px;
+	height: 50px;
+	width: 1000px;
+	text-align: center;
+	line-height:50px;
+}
+
+#navmenu {
+	background-color: black;
+	margin: 0px auto;
+	padding: 0px;
+	height: 50px;
+	width: 1000px;
+}
+
+*{ margin:0px; padding: 0px; }
+nav {
+	font-family: arial, sans-serif;
+	position: relative;
+	width: 1000px;
+	height:49px;
+	font-size:14px;
+	color:white;
+	margin: 0px;
+	padding: 0px;
+	float:left;
+	z-index:4;
+	text-decoration:none;
+}
+
+nav ul {
+list-style-type: none;
+}
+
+nav ul li {
+float: left;
+text-align: center;
+position: relative;
+height: 50px;
+width: 125px;
+border: none;
+text-decoration:none;
+}
+nav ul li a {
+text-align: center;
+border:1px solid black;
+display:block;
+text-decoration:none;
+color:#999;
+height: 48px;
+width: 124px;
+line-height:50px;
+}
+nav li ul.sub-menu {
+display: none;
+padding-left: 0;
+}
+
+.sub-menu li {
+text-align: center;
+border:none;
+background:#6dc7ec;
+display:block;
+text-decoration:none;
+height: 49px;
+width: 125px;
+line-height:50px;
+
+}
+
+.sub-menu li:hover {
+background:#6dc7ec;
+color:#fff;
+}
+
+.sub-menu li:hover a {
+display:block;
+background:#12aeef;
+color:white;
+width: 125px;
+height:49px;
+text-align: center;
+border: none;
+line-height:50px;
+text-decoration:none;
+}
