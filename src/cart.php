@@ -1,42 +1,53 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>My cart</title>
-</head>
-<body>
-	<div>
-		<h1>My cart</h1>
-	</div>
-	<ol>
-		<li>
-			<div>
-				<img id="Dujardin - Jeux de société" src="../image/Dujardin - Jeux de société.jpg">
-			</div>
-			<div>
-				Dujardin - Jeux de société -Burger Quiz - 01095
-			</div>
-			<span>EUR 24,90<button>Acheter cet article</button></span>
-		</li>
-		<li>
-			<div>
-				<img id="Soft Squishy toy" src="../image/Soft Squishy toys.jpg">
-			</div>
-			<div>
-				Isuper Soft Squishy toys,Galaxy mignon cerf jouet cadeau pour les enfants et les adultes (11cm)
-			</div>
-			<span>EUR 2,90<button>Acheter cet article</button></span>
-		</li>
-		<li>
-			<div>
-				<img id="LEGO Creator - Le dinosaure féroce" src="../image/LEGO Creator - Le dinosaure féroce.jpg">
-			</div>
-			<div>
-				LEGO Creator - Le dinosaure féroce - 31058 - Jeu de Construction
-			</div>
-			<span>EUR 10,84<button>Acheter cet article</button></span>
-		</li>
+<?php
+session_start();
 
-	</ol>
+$ids = $_GET["ids"];
 
-</body>
-</html>
+
+if(empty($_SESSION["gwc"]))
+{
+    //1.购物车是空的，第一次点击添加购物车
+    $arr = array(
+        array($ids,1)
+    );
+    $_SESSION["gwc"]=$arr;
+}
+else
+{
+    //不是第一次点击
+    //判断购物车中是否存在该商品
+    $arr = $_SESSION["gwc"]; //先存一下
+
+    $chuxian = false;
+    foreach($arr as $v)
+    {
+        if($v[0]==$ids)
+        {
+            $chuxian = true;
+        }
+    }
+
+    if($chuxian)
+    {
+        //3.如果购物车中有该商品
+
+        for($i=0;$i<count($arr);$i++)
+        {
+            if($arr[$i][0]==$ids)
+            {
+                $arr[$i][1]+=1;
+            }
+        }
+
+        $_SESSION["gwc"] = $arr;
+    }
+    else
+    {
+        //2.如果购物车中没有该商品
+        $asg = array($ids,1);
+        $arr[] = $asg;
+        $_SESSION["gwc"] = $arr;
+    }
+
+}
+header("location:gouwuche.php");
