@@ -1,53 +1,31 @@
 <head>
 <link href="../css/main.css"/ rel="stylesheet" type="text/css" />
 </head>
-<body>
-<div class="body">
+<body class="body">
 <?php include 'header.php'?>
 <div id="content">
-<br><br><br><br>
-<form class="login-table" name="register" id="register-form" action="inscrire.php" method="post">
-		<div class="login-left">
-			<label class="username">Username : </label>
-			<input type="text" class="yhmiput" name="username" placeholder="Username" id="username">
-		</div>
-		<div>
-			<label class="age">Age : </label>
-			<input type="text" class="yhmiput" name="age" placeholder="Age" id="age">
-		</div>
-
-		<div>
-			<label class="age">Sex : </label>
-			<input type="radio" name="sex" value="1" class="sex" checked>male
-			<input type="radio" name="sex" value="0" class="sex">female
-		</div>
-
-		<div>
-			<label class="email">Email : </label>
-			<input type="email" name="email" id="email" placeholder="email">
-		</div>
-		<div>
-			<label class="age">Birthday : </label>
-			<input type="date" class="yhmiput" name="birthday" placeholder="" id="birthday">
-		</div>
-
-		<div class="login-right">
-			<label class="passwd">Password : </label>
-			<input type="password" class="yhmiput" name="password" placeholder="Password" id="password">
-		</div>
-
-		<div class="login-right">
-			<label class="passwd">Confirmer_password : </label>
-			<input type="password" class="yhmiput" name="repassword" placeholder="Repassword"
-			id="repassword">
-		</div>
-
-		<div class="login-btn">
-			<button type="submit">confirmer</button>
-			<button type="reset">reset</button>
-		</div>
+<form action="inscrirecheck.php" method="post">
+Username :<input type="text" name="username" placeholder="Username" id="username" maxlength="20" required oninvalid="setCustomValidity('Please input yourname.');" oninput="setCustomValidity('');">
+<BR><BR>
+Age :<input type="number" name="age" placeholder="Age" id="age" min="0" max="100" required oninvalid="setCustomValidity('Please input your age.');" oninput="setCustomValidity('');">
+<BR><BR>
+Sex :<select name="sex">
+<option value="0">Male</option>
+<option value="1">Female</option>
+</select>
+<BR><BR>
+Email :<input type="email" name="email" id="email" placeholder="Email" required oninvalid="setCustomValidity('Please input your email.');" oninput="setCustomValidity('');">
+<BR><BR>
+Birthday :<input type="date"name="birthday" placeholder="" id="birthday" required oninvalid="setCustomValidity('Please input your birthday.');" oninput="setCustomValidity('');">
+<BR><BR>
+Password :<input type="password" name="pwd" placeholder="Password" id="password" maxlength="10" required oninvalid="setCustomValidity('Please input the password.');" oninput="setCustomValidity('');">
+<BR><BR>
+Confirmer password :<input type="password" name="repwd" placeholder="Repassword" id="repassword" maxlength="10" required oninvalid="setCustomValidity('Cannot be empty.');" oninput="setCustomValidity('');">
+<?php /*?><?php $password = trim($_GET["pwd"]);$repassword = trim($_GET["repassword"]);if($password != $repassword){echo"hhah";} ?><?php */?>
+<BR><BR>
+<button type="submit">Confirmer</button>
+<button type="reset">Reset</button>
 </form>
 </div>
 <?php include 'footer.php'?>
-</div>
 </body>
