@@ -12,6 +12,9 @@
 	padding: 0px;
 	border:0;
 }*/
+a{ 
+text-decoration:none; 
+}
 
 .body {
 	height: 100%;

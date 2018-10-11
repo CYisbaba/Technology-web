@@ -2,7 +2,9 @@
 <link href="../css/main.css"/ rel="stylesheet" type="text/css" />
 </head>
 <body class="body">
+
 <?php include 'header.php'?>
+
 <div id="content">
 <form action="inscrirecheck.php" method="post">
 Username :<input type="text" name="username" placeholder="Username" id="username" maxlength="20" required oninvalid="setCustomValidity('Please input yourname.');" oninput="setCustomValidity('');">
@@ -21,11 +23,12 @@ Birthday :<input type="date"name="birthday" placeholder="" id="birthday" require
 Password :<input type="password" name="pwd" placeholder="Password" id="password" maxlength="10" required oninvalid="setCustomValidity('Please input the password.');" oninput="setCustomValidity('');">
 <BR><BR>
 Confirmer password :<input type="password" name="repwd" placeholder="Repassword" id="repassword" maxlength="10" required oninvalid="setCustomValidity('Cannot be empty.');" oninput="setCustomValidity('');">
-<?php /*?><?php $password = trim($_GET["pwd"]);$repassword = trim($_GET["repassword"]);if($password != $repassword){echo"hhah";} ?><?php */?>
 <BR><BR>
 <button type="submit">Confirmer</button>
 <button type="reset">Reset</button>
 </form>
 </div>
+
 <?php include 'footer.php'?>
+
 </body>

@@ -5,6 +5,7 @@
 </div>
 <?php  
 	session_start();
+	
 	if(empty($_SESSION["username"])){?>
 <div id="navmenu">
 	<nav>

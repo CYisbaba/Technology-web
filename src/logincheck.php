@@ -17,6 +17,7 @@
 			
             if($num){
 				$_SESSION["username"]=$username;
+				$_SESSION["user_id"]=$user_id;
 				echo "Success!"; 
 				header('Refresh: 1; url=index.php');
             }  

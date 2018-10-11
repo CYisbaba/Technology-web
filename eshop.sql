@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主机： 127.0.0.1:3306
--- 生成日期： 2018-10-10 10:45:15
+-- 生成日期： 2018-10-11 21:00:26
 -- 服务器版本： 5.7.23
 -- PHP 版本： 5.6.38
 
@@ -32,6 +32,7 @@ DROP TABLE IF EXISTS `cart`;
 CREATE TABLE IF NOT EXISTS `cart` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `produit_id` int(11) NOT NULL,
+  `number` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
@@ -51,14 +52,15 @@ CREATE TABLE IF NOT EXISTS `produit` (
   `description` varchar(100) NOT NULL,
   `img_url` varchar(100) NOT NULL,
   PRIMARY KEY (`produit_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 --
 -- 转存表中的数据 `produit`
 --
 
 INSERT INTO `produit` (`produit_id`, `name`, `number`, `price`, `description`, `img_url`) VALUES
-(1, 'logo', 4, 1.11, 'logo', '../image/bbb.jpg');
+(1, 'logo', 4, 1.11, 'logo', '../image/bbb.jpg'),
+(2, 'vvv', 12, 11111, 'maliya', '../image/ddd.jpg');
 
 -- --------------------------------------------------------
 
@@ -76,7 +78,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `birthday` date NOT NULL,
   `pwd` varchar(20) NOT NULL,
   PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 --
 -- 转存表中的数据 `user`
@@ -85,7 +87,8 @@ CREATE TABLE IF NOT EXISTS `user` (
 INSERT INTO `user` (`user_id`, `username`, `age`, `sex`, `email`, `birthday`, `pwd`) VALUES
 (1, 'aaa', 12, 0, '111@qq.com', '2018-10-08', 'aaa'),
 (2, 'bbb', 11, 0, '11111@gg.com', '2018-10-08', 'bbb'),
-(3, 'ccc', 11, 0, '11111@gg.com', '2018-10-22', 'ccc');
+(3, 'ccc', 11, 0, '11111@gg.com', '2018-10-22', 'ccc'),
+(4, 'vvvv', 34, 0, 'qqq@qq.com', '2018-10-23', 'vvv');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

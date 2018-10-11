@@ -1,9 +1,10 @@
 <head>
 <link href="../css/main.css"/ rel="stylesheet" type="text/css" />
 </head>
-<body>
-<div class="body">
+<body class="body">
+
 <?php include 'header.php'?>
+
 <div id="content">
 <br><br><br><br>
 <form class="login-table" name="register" id="register-form" action="inscrire.php" method="post">
@@ -22,6 +23,7 @@
 		</div>
 </form>
 </div>
+
 <?php include 'footer.php'?>
-</div>
+
 </body>

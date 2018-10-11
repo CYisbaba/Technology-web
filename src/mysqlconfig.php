@@ -9,5 +9,5 @@
     }
     
     mysql_select_db('eshop',$con);
-	mysql_query("set names 'gdk'");
+	mysql_query("set names 'utf8'");
 ?>
