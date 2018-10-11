@@ -1,13 +1,12 @@
 <?php
-    $server="localhost";
-    $db_username="root";
-    $db_password="";
+    $server = "localhost";
+    $db_username = "root";
+    $db_password = "";
+    $db_name = "eshop";
 
-    $con = mysql_connect($server,$db_username,$db_password);
+    $con = mysqli_connect($server, $db_username, $db_password, $db_name);
     if(!$con){
-        die("can't connect".mysql_error());
+        die("can't connect".mysqli_connect_error());
     }
-    
-    mysql_select_db('eshop',$con);
-	mysql_query("set names 'utf8'");
+    mysqli_query($con, 'set names utf8');
 ?>

@@ -1,17 +1,5 @@
-<?php
-
-$search=$_POST['name'];
-include("mysqlconfig.php");
-$sql1=mysql_query("select * from produit where (name like'%$search%')");
-$info1=mysql_fetch_array($sql1);
-?>
-<?php do { ?>
-<?php echo $info1['name']; ?>
-<?php } while ($info1 = mysql_fetch_assoc($sql1)); ?>
-
 <!DOCTYPE html>
 <html>
-
 <head>
 <link href="../css/main.css"/ rel="stylesheet" type="text/css" />
 <link href="../css/search.css"/ rel="stylesheet" type="text/css" />
@@ -20,44 +8,32 @@ $info1=mysql_fetch_array($sql1);
 	<div class="body">
 	<?php include 'header.php'?>
 	<div id="content">
-		<form action="search.php" method="post">
+		<form action="search_result.php" method="POST" id="search_form">
  			<div class='form'>
-   				<input type="text" name="uname" placeholder="Search here...">
-     			<button>SEARCH</button>     
+   				<input type="text" name="uname" placeholder="Search here..." id="uname">
+     			<button type="submit">search</button>
  			</div>
 		</form>
-		<div class="product">
-		<img src="../image/Dujardin - Jeux de société.jpg">
-		</div>
-		<div class="product">
-		<img src="../image/Dujardin - Jeux de société.jpg">
-		</div>
-		<div class="product">
-		<img src="../image/Dujardin - Jeux de société.jpg">
-		</div>
-		<div class="product">
-		<img src="../image/Dujardin - Jeux de société.jpg">
-		</div>
-		<div class="product">
-		<img src="../image/Dujardin - Jeux de société.jpg">
-		</div>
-		<div class="product">
-		<img src="../image/Dujardin - Jeux de société.jpg">
-		</div>
-		<div class="product">
-		<img src="../image/Dujardin - Jeux de société.jpg">
-		</div>
-		<div class="product">
-		<img src="../image/Dujardin - Jeux de société.jpg">
-		</div>
-		<div class="product">
-		<img src="../image/Dujardin - Jeux de société.jpg">
-		</div>
-		<div class="product">
-		<img src="../image/Dujardin - Jeux de société.jpg">
-		</div>
+		
 	</div>
 
 	<?php include 'footer.php'?>
 </body>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/layer/2.3/layer.js"></script>
+<script>
+    $(function () {
+        $('#search_form').submit(function () {
+            var uname = $('#uname').val()
+            if (uname == '' || username.length <= 0) {
+                layer.tips('please enter ', '#uname', {time: 2000, tips: 2});
+                $('#uname').focus();
+                return false;
+            }
+            return true;
+        })
+
+    })
+</script>
 </html>
