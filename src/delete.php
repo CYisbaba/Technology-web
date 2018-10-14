@@ -1,6 +1,8 @@
 <?php
-session_start();
-$id = $_GET["ids"];
+//session_start();
+if(!empty($_GET["id"])){
+
+$id = $_GET["id"] - 1;
 $arr = $_SESSION["cart"];
 
 if($arr[$id][1] > 1){
@@ -11,5 +13,6 @@ else{
 	$arr = array_values($arr);
 }
 $_SESSION["cart"] = $arr;
-header("location:cart.php");
+header('location:index.php?action=cart');
+}
 ?>

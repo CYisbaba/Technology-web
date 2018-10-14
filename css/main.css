@@ -20,7 +20,7 @@ text-decoration:none;
 	height: 100%;
 	width: 100%;
 	z-index:-1;
-	background-image: url(../image/bg.jpg);
+    background-color: white;
 	background-attachment: fixed;
 	background-position: center center;
 	background-size: cover;

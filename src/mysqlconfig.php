@@ -8,5 +8,5 @@
     if(!$con){
         die("can't connect".mysqli_connect_error());
     }
-    mysqli_query($con, 'set names utf8');
+    $con -> query('set names utf8');
 ?>

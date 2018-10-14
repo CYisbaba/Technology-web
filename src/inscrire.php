@@ -1,12 +1,5 @@
-<head>
-<link href="../css/main.css"/ rel="stylesheet" type="text/css" />
-</head>
-<body class="body">
-
-<?php include 'header.php'?>
-
 <div id="content">
-<form action="inscrirecheck.php" method="post">
+<form action="index.php?action=inscrire&id=inscrire" method="post">
 Username :<input type="text" name="username" placeholder="Username" id="username" maxlength="20" required oninvalid="setCustomValidity('Please input yourname.');" oninput="setCustomValidity('');">
 <BR><BR>
 Age :<input type="number" name="age" placeholder="Age" id="age" min="0" max="100" required oninvalid="setCustomValidity('Please input your age.');" oninput="setCustomValidity('');">
@@ -28,7 +21,3 @@ Confirmer password :<input type="password" name="repwd" placeholder="Repassword"
 <button type="reset">Reset</button>
 </form>
 </div>
-
-<?php include 'footer.php'?>
-
-</body>

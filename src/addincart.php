@@ -1,24 +1,26 @@
 <?php
-session_start();
+//session_start();
+if(!empty($_GET["id"])){
 $id = $_GET["id"];
 
+include("mysqlconfig.php");
 
-//include("mysqlconfig.php");
-//$sql = "select * from cart where produit_id = '$id'";
-//$result = mysql_query($sql);
-//while($row = mysql_fetch_array($result)){
-//$arr = array(array($row["produit_id"],$row["number"]));	
-//$_SESSION["cart"] = $arr;
-//}
+//$sql = "select * from produit where produit_id = '$id'";
+//$result = $con -> query($sql);
+//$row = $result -> fetch_array();
+//$number = $row["number"] - 1;
+//$sql_insert = "insert into produit(number) values('$number') where produit_id = '$id'";
+//$result_insert = $con -> query($sql_insert);
 
 if(empty($_SESSION["cart"])){
 	//create new cart
 	$arr = array(array($id,1));
 	$_SESSION["cart"] = $arr;
+	header('location:index.php?action=product');
 }
 else{
 	$arr = $_SESSION["cart"];
-
+	
 	if(exit_id($id,$arr)){
 
 		//if there is the product, add number
@@ -28,7 +30,8 @@ else{
 				$arr[$k][1]++;    
    			}
 		} 
-  		$_SESSION["cart"] = $arr;  
+  		$_SESSION["cart"] = $arr;
+		header('location:index.php?action=product');
 
 	}
 	else{
@@ -38,9 +41,11 @@ else{
 		$attr = array($id,1);
 		$arr[] = $attr;
 		$_SESSION["cart"] = $arr;
+		header('location:index.php?action=product');
 	}
 }
-
+}
+//header('location:produit.php');
 //$arr = $_SESSION["cart"];
 //foreach($arr as $k=>$v){
 //	$id = $v[0];
@@ -50,10 +55,10 @@ else{
 //	$result_insert = mysql_query($sql_insert);
 //}
 
-header("location:produire.php");
+//header("location:index.php?action=product");
 
  
-
+//judge whether the product in cart or not
 function exit_id($value, $array) { 
 
 	foreach($array as $item) { 
@@ -77,3 +82,5 @@ function exit_id($value, $array) {
 	} 
 	return false; 
 }
+
+?>
