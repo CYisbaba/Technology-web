@@ -20,7 +20,7 @@ text-decoration:none;
 	height: 100%;
 	width: 100%;
 	z-index:-1;
-    background-color: white;
+    background-color: #EBEBEB;
 	background-attachment: fixed;
 	background-position: center center;
 	background-size: cover;
@@ -51,11 +51,12 @@ text-decoration:none;
 }
 
 #banner {
-	background-color: red;
+	background-color: black;
 	float: right;
 	height: 100px;
 	width: 75%;
 	font-size:70px;
+	color:white;
 	background-image: ;
 	background-repeat: no-repeat;
 	text-align: center;
@@ -83,17 +84,23 @@ text-decoration:none;
 }  
 
 #footer {
-	background-color: green;
+	background-color: grey;
 	margin: 0px auto;
 	padding: 0px;
 	height: 100px;
 	width: 100%;
 	text-align: center;
 	line-height:50px;
+	position: fixed;
+	bottom:0;
+	opacity: 0.8;
+	z-index:100;
+	background:linear-gradient(to bottom,#bbbbbb,grey);
+	color:white;
 }
 
 #navmenu {
-	background-color: black;
+	/*background-color: white;*/
 	margin: 0px auto;
 	padding: 0px;
 	height: 50px;
@@ -105,73 +112,107 @@ text-decoration:none;
 }
 
 *{ margin:0px; padding: 0px; }
+
 nav {
 	font-family: arial, sans-serif;
 	position: absolute;
 	width: 2000px;
-	height:49px;
-	font-size:14px;
+	height:50px;
+	font-size:15px;
 	color:white;
-	margin: 0px;
+	margin: 0px auto;
 	padding: 0px;
 	float:left;
 	z-index:4;
 	text-decoration:none;
+} 
+nav ul {
+    background:linear-gradient(to bottom,black,#bbbbbb);
+    list-style-type: none;
+	position:relative; 
 }
 
-nav ul {
-list-style-type: none;
+nav ul ul {
+    display:none;
+    position:absolute;
+    top:100%;
+	transition: all 1s ease;
 }
 
 nav ul li {
-float: left;
-text-align: center;
-position: relative;
-height: 50px;
-width: 125px;
-border: none;
-text-decoration:none;
+	float: left;
+	text-align: center;
+	position: relative;
+	height: 50px;
+	width: 125px;
+	border: none;
+	text-decoration:none;
 }
+ 
+nav ul::after {
+    content:"";
+    display:block;
+    clear:both;
+}
+
 nav ul li a {
-text-align: center;
-border:1px solid black;
-display:block;
-text-decoration:none;
-color:#999;
-height: 48px;
-width: 124px;
-line-height:50px;
-}
-nav li ul.sub-menu {
-display: none;
-padding-left: 0;
-}
-
-.sub-menu li {
-text-align: center;
-border:none;
-background:#6dc7ec;
-display:block;
-text-decoration:none;
-height: 49px;
-width: 125px;
-line-height:50px;
+	text-align: center;
+	display:block;
+	text-decoration:none;
+	color:white;
+	height: 50px;
+	width: 125px;
+	line-height:50px;
 
 }
 
-.sub-menu li:hover {
-background:#6dc7ec;
-color:#fff;
+
+
+
+nav ul .aa {
+	float: left;
+	text-align: center;
+	position: relative;
+	height: 50px;
+	width: 125px;
+	border: none;
+	text-decoration:none;
+}
+ 
+nav ul::after {
+    content:"";
+    display:block;
+    clear:both;
 }
 
-.sub-menu li:hover a {
-display:block;
-background:#12aeef;
-color:white;
-width: 125px;
-height:49px;
-text-align: center;
-border: none;
-line-height:50px;
-text-decoration:none;
+nav ul .aa a {
+	text-align: center;
+	display:block;
+	text-decoration:none;
+	color:white;
+	height: 50px;
+	width: 125px;
+	line-height:50px;
+
+}
+
+nav ul .aa:hover > ul {
+    display:block;
+	transition: all 1s ease;
+}
+
+nav ul .aa:hover {
+    background:linear-gradient(to bottom,#4f5964,#5f6975);
+}
+ 
+nav ul .aa:hover a {
+    color:#FFF;
+}
+
+nav ul .aa > ul:hover{
+	background:linear-gradient(to bottom,#4f5964,#5f6975);
+}
+
+nav ul .aa > ul:hover a{
+	background:linear-gradient(to bottom,#4f5964,#5f6975);
 }

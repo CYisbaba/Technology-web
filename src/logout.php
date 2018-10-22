@@ -1,12 +1,13 @@
 <?php 	
 //session_start();
 
-if((!empty($_GET['action'])) && ($_GET['action'] == "logout")){
+if((isset($_GET['action'])) && ($_GET['action'] == "logout")){
 	
 	unset($_SESSION["username"]);
+	unset($_SESSION["user_id"]);
 	unset($_SESSION["admin"]);
 	unset($_SESSION["cart"]);
-	echo "<script>alert('Logout'); location = 'index.php';</script>";
+	echo "<script>alert('Logout'); location = '".htmlentities($_SERVER['PHP_SELF'])."';</script>";
 	//header('location:index.php');
 } 	
 ?>

@@ -1,8 +1,5 @@
 <?php
-//session_start();
 
-//if(empty($_SESSION["admin"])){echo"You cannot in";header('Refresh: 1; url=index.php');}
-//else{
 if(isset($_POST["name"])){
 		$name = $_POST["name"]; 
 		$price = $_POST["price"]; 
@@ -52,7 +49,7 @@ else{
             		else
             		{
 						//modify product
-						if(!empty($_GET["id"])){
+						if(isset($_GET["id"])){
 							$id = $_GET["id"];
 							$sql_modify = "update produit set name = '$name', number = '$number', price = '$price', description = '$description', img_url = '$filename' where produit_id = '$id'";  
                     		$result_modify = $con -> query($sql_modify); 
