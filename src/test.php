@@ -16,3 +16,15 @@ echo "mysql 连接成功！";
 // 关闭mysql连接
 mysql_close($conn);
 ?>
+<?php
+//session_start();
+$id = 0;
+if(!isset($id)){
+echo"hahaha";
+
+}else{
+echo"error";
+}
+
+
+?>
