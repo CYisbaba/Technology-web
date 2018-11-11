@@ -1,12 +1,15 @@
-<html>
-<head>
-<link href="../css/main.css"/ rel="stylesheet" type="text/css" />
-
 <?php 
-include("mysqlconfig.php");
 
 session_start();
+
+include("mysqlconfig.php");
+
 ?>
+
+<html>
+<head>
+
+<link href="../css/main.css"/ rel="stylesheet" type="text/css" />
 
 </head>
 
