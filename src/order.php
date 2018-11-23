@@ -1,55 +1,5 @@
 <div id="content">
 <?php
-if(isset($_SESSION["username"])){
-	
-	$user_id = $_SESSION["user_id"];
-	
-	//delete
-	if(isset($_GET["delete"])){
-		
-		$order_id = $_GET["delete"];
-		
-		$sql_delete = "delete from orders where order_id = '$order_id'";
-		$result_delete = $con -> query($sql_delete);
-		
-		header('location:'.htmlentities($_SERVER['PHP_SELF']).'?action=order');
-	}
-	
-	//pay
-	if(isset($_GET["pay"])){
-		
-		$address_id = $_POST["address"];
-		$money = $_SESSION["money"];
-		$order_id = $_GET["pay"];
-		
-		$sql = "select amount from orders where order_id = '$order_id'";
-		$result = $con -> query($sql);
-		$row = $result -> fetch_array();
-		
-		$amount = $row["amount"];
-		
-		$rest = $money - $amount;
-		
-		if($rest >= 0){
-		
-			$sql_pay = "update orders set status = 'payed', address_id = '$address_id' where order_id = '$order_id'";
-			$result_pay = $con -> query($sql_pay);
-			
-			$user_id = $_SESSION["user_id"];
-			
-			$sql_rest = "update user set money = '$rest' where user_id = '$user_id'";
-			$result_rest = $con -> query($sql_rest);
-			
-			$_SESSION["money"] = $rest;
-		
-			echo "<script>alert('Success!'); location = '".htmlentities($_SERVER['PHP_SELF'])."?action=order';</script>";
-			//header('location:'.htmlentities($_SERVER['PHP_SELF']).'?action=order');
-		}
-		else{
-		
-			echo "<script>alert('No enough money!'); location = '".htmlentities($_SERVER['PHP_SELF'])."?action=order';</script>";	
-		}
-	}
 	
 	$sql_order = "select * from orders where user_id = '$user_id' and type = 'order'";
 	$result_order = $con -> query($sql_order);
@@ -63,14 +13,16 @@ if(isset($_SESSION["username"])){
 			$address_id = $row_order["address_id"];
 			
 			echo "<div align='center'><table bgcolor=white border='1' width=100%>
-			<tr>".$row_order["updated"]."</tr>
+			<caption>".$row_order["updated"]."</caption>
+			<thead>
 			<tr>
 			<th></th>
 			<th>Name</th>
 			<th>Number</th>
 			<th>Price</th>
 			<th></th>
-			</tr>";
+			</tr>
+			</thead>";
 
 			$sql_unpay = "select img_url,name,price,links.number,links.produit_id from links,produit where links.order_id = '$order_id' and links.produit_id = produit.produit_id";
 			$result_unpay = $con -> query($sql_unpay);
@@ -92,7 +44,7 @@ if(isset($_SESSION["username"])){
 		<td></td>
 		<td></td>
 		<td>Total price:".$row_order["amount"]."</td>
-		<td><a text-decoration:none href='".htmlentities($_SERVER['PHP_SELF'])."?action=order&delete=".$order_id."' onClick='return confirm(`Are you sure?`);'>DELETE</a></td>
+		<td><a text-decoration:none href='".htmlentities($_SERVER['PHP_SELF'])."?page=order&action=order_action&delete=".$order_id."' onClick='return confirm(`Are you sure?`);'>DELETE</a></td>
 		</tr>";
 		
 		//payed
@@ -100,11 +52,11 @@ if(isset($_SESSION["username"])){
 			
 			echo "<tr>";
 			
-			$sql_address = "select * from addresses where address_id = '$address_id'";
+			$sql_address = "select * from order_addresses where address_id = '$address_id'";
 			$result_address = $con -> query($sql_address);
 			$row_address = $result_address -> fetch_array();
 			
-			echo "<td><a>".$row_address["name"].", ".$row_address["address1"].", ".$row_address["address2"].", ".$row_address["code"].", ".$row_address["city"].", ".$row_address["country"]."</a></td>
+			echo "<td colspan='5'><a>".$row_address["name"].", ".$row_address["address1"].", ".$row_address["address2"].", ".$row_address["code"].", ".$row_address["city"].", ".$row_address["country"]."</a></td>
 			</tr>";
 			echo "<tr>
 			<td><a>PAYED</a></td>
@@ -121,8 +73,8 @@ if(isset($_SESSION["username"])){
 			
 				echo "
 				<tr>
-				<form action='".htmlentities($_SERVER['PHP_SELF'])."?action=order&pay=".$order_id."' method='post'>
-				<td><select name='address' id='address'>";
+				<form action='".htmlentities($_SERVER['PHP_SELF'])."?page=order&action=order_action&pay=".$order_id."' method='post'>
+				<td colspan='5'><select name='address' id='address'>";
 			
 				while($row_address = $result_address -> fetch_array()){
 				
@@ -132,9 +84,8 @@ if(isset($_SESSION["username"])){
 				}
 			
 				echo "</select></td>
-				<td></td>
-				<td></td>
-				<td></td>
+				</tr>
+				<tr>
 				<td>
 				<button type='submit' id='sumbit' name='submit' onClick='return confirm(`Are you sure?`);'>PAY</button>
 				</td>
@@ -153,10 +104,5 @@ if(isset($_SESSION["username"])){
 		
 		echo "No orders";
 	}
-}
-else{
-	
-	header("location:index.php");
-}
 ?>
 </div>

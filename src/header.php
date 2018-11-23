@@ -1,11 +1,3 @@
-<?php 
-include("cookiecheck.php");
-include("logincheck.php"); 
-include("logout.php");	
-include("inscrirecheck.php");
-
-?>
-
 <div style="width:100%; height:50px"></div>
 
 <div id="header">
@@ -17,8 +9,8 @@ include("inscrirecheck.php");
 </div>
 
 <?php
-	//logout  
-	if(empty($_SESSION["username"])){
+	//if logout  
+	if(empty($_SESSION["user_id"])){
 		?>
         
 <div id="navmenu">
@@ -31,7 +23,7 @@ include("inscrirecheck.php");
 			<li></li>
             <li></li>
 			<li class="aa"><a href="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>">Homepage</a></li>
-			<li class="aa"><a href="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>?action=product">Product</a>
+			<li class="aa"><a href="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>?page=product">Product</a>
             <ul>
             <?php 
 			$sql_range = "select * from ranges";
@@ -39,7 +31,7 @@ include("inscrirecheck.php");
 			
 			while($row_range = $result_range -> fetch_array()){
 				
-				echo "<li><a href='".htmlentities($_SERVER['PHP_SELF'])."?action=product&range=".$row_range["range_id"]."'>".$row_range["name"]."</a></li>";
+				echo "<li><a href='".htmlentities($_SERVER['PHP_SELF'])."?page=product&range=".$row_range["range_id"]."'>".$row_range["name"]."</a></li>";
 			}
 			?>
             </ul>
@@ -61,7 +53,7 @@ include("inscrirecheck.php");
             	remember<input type="checkbox" name="cookie" id="cookie">
             </li>
 			<li>
-				<a href="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>?action=inscrire" style="color:white"><input type="submit" id="sumbit" name="submit" style="width:60px" value="login" />Inscrire</a>
+				<a href="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>?page=inscrire" style="color:white"><input type="submit" id="sumbit" name="submit" style="width:60px" value="login" />Inscrire</a>
 			</li>       
 		</ul>
         
@@ -74,8 +66,14 @@ include("inscrirecheck.php");
 <?php
 	}
 	
-	//login
+	//if login
 	else{
+		
+		$sql_money = "select money from user where user_id = '$user_id'";
+		$result_money = $con -> query($sql_money);
+		$row_money = $result_money -> fetch_array();
+		
+		$money = $row_money["money"];
 ?>
     
 <div id="navmenu">
@@ -88,7 +86,7 @@ include("inscrirecheck.php");
         	<li></li>
 			<li></li>
 			<li class="aa"><a href="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>">Homepage</a></li>
-			<li class="aa"><a href="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>?action=product">Product</a>
+			<li class="aa"><a href="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>?page=product">Product</a>
             <ul>
             <?php 
 			$sql_range = "select name,range_id from ranges";
@@ -96,7 +94,7 @@ include("inscrirecheck.php");
 			
 			while($row_range = $result_range -> fetch_array()){
 				
-				echo "<li><a href='".htmlentities($_SERVER['PHP_SELF'])."?action=product&range=".$row_range["range_id"]."'>".$row_range["name"]."</a></li>";
+				echo "<li><a href='".htmlentities($_SERVER['PHP_SELF'])."?page=product&range=".$row_range["range_id"]."'>".$row_range["name"]."</a></li>";
 			}
 			?>
             </ul>
@@ -108,11 +106,12 @@ include("inscrirecheck.php");
 			<li><br /><input type="submit" id="sumbit" name="submit" style="width:60px" value="Search" /></li>
 			<li></li>
             <li></li>
-			<li class="aa"><a href="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>?action=cart"><img src="../image/cart.jpg" height="40" width="40"/></a></li>
-			<li class="aa"><a href="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>?action=changeinfo"><?php echo $_SESSION["username"]; ?></a>
+			<li class="aa"><a href="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>?page=cart"><img src="../image/cart.jpg" height="40" width="40"/></a></li>
+			<li class="aa"><a href="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>?page=changeinfo"><?php echo $_SESSION["username"]; ?></a>
             <ul>
-            <li><a href="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>?action=money"><?php echo $_SESSION["money"]; ?></a></li>
-			<li><a href="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>?action=order">Orders</a></li>
+            <li><a href="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>?page=money"><?php echo $money; ?></a></li>
+            <li><a href="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>?page=changeadd">Addresses</a></li>
+			<li><a href="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>?page=order">Orders</a></li>
 			<li><a href="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>?action=logout" style="color:red">LOGOUT</a></li>
             </ul>
             </li>

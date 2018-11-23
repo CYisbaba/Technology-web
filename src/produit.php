@@ -1,5 +1,3 @@
-<?php include("addincart.php");?>
-
 <div id="content">
 
 <?php 
@@ -26,9 +24,9 @@ if(isset($_GET["range"])){
 $sql = "select * from produit where range_id = '$range_id'";
 
 //page
-if(isset($_GET["page"])){
+if(isset($_GET["pages"])){
 	
-	$current_page = $_GET["page"];
+	$current_page = $_GET["pages"];
 	
 	$sql_count = "select count(*) as 'count' from produit where range_id = '$range_id'";	
 	$result_count = $con -> query($sql_count);
@@ -73,12 +71,12 @@ if(isset($_GET["order"]) && isset($_GET["ids"])){
 echo "<div align='center'><table bgcolor=white border='1' width=100%>
 <tr>
 <th></th>
-<th>Name<a href='".htmlentities($_SERVER['PHP_SELF'])."?action=product&range=".$range_id."&ids=name&order=asc'>↓</a>
-<a href='".htmlentities($_SERVER['PHP_SELF'])."?action=product&range=".$range_id."&ids=name&order=desc'>↑</a></th>
-<th>Number<a href='".htmlentities($_SERVER['PHP_SELF'])."?action=product&range=".$range_id."&ids=number&order=asc'>↓</a>
-<a href='".htmlentities($_SERVER['PHP_SELF'])."?action=product&range=".$range_id."&ids=number&order=desc'>↑</a></th>
-<th>Price<a href='".htmlentities($_SERVER['PHP_SELF'])."?action=product&range=".$range_id."&ids=price&order=asc'>↓</a>
-<a href='".htmlentities($_SERVER['PHP_SELF'])."?action=product&range=".$range_id."&ids=price&order=desc'>↑</a></th>
+<th>Name<a href='".htmlentities($_SERVER['PHP_SELF'])."?page=product&range=".$range_id."&ids=name&order=asc'>↓</a>
+<a href='".htmlentities($_SERVER['PHP_SELF'])."?page=product&range=".$range_id."&ids=name&order=desc'>↑</a></th>
+<th>Number<a href='".htmlentities($_SERVER['PHP_SELF'])."?page=product&range=".$range_id."&ids=number&order=asc'>↓</a>
+<a href='".htmlentities($_SERVER['PHP_SELF'])."?page=product&range=".$range_id."&ids=number&order=desc'>↑</a></th>
+<th>Price<a href='".htmlentities($_SERVER['PHP_SELF'])."?page=product&range=".$range_id."&ids=price&order=asc'>↓</a>
+<a href='".htmlentities($_SERVER['PHP_SELF'])."?page=product&range=".$range_id."&ids=price&order=desc'>↑</a></th>
 <th>Descriptiom</th>
 </tr>";
 
@@ -94,9 +92,9 @@ echo "<td>".$row['price']."</td>";
 echo "<td>".$row['description']."</td>";
 
 //show add in cart after login
-if(!empty($_SESSION["username"])){
+if(!empty($_SESSION["user_id"])){
 	
-echo "<td><a text-decoration:none href='".htmlentities($_SERVER['PHP_SELF'])."?action=product&range=".$range_id."&id=".$row['produit_id']."'>Add in cart</a></td>";}
+echo "<td><a text-decoration:none href='".htmlentities($_SERVER['PHP_SELF'])."?page=product&range=".$range_id."&action=addincart&id=".$row['produit_id']."'>Add in cart</a></td>";}
 echo "</tr>";
 }
 
@@ -104,12 +102,12 @@ echo "</table>";
 
 if($current_page > 1){
 
-echo "<a href='".$_SERVER['PHP_SELF']."?action=product&range=".$range_id."&page=".$prepage."&ids=".$ids."&order=".$order."'><-previous page</a>";
+echo "<a href='".$_SERVER['PHP_SELF']."?page=product&range=".$range_id."&pages=".$prepage."&ids=".$ids."&order=".$order."'><-previous page</a>";
 }
 echo " | ";
 
 if($current_page < $pages){
-echo "<a href='".$_SERVER['PHP_SELF']."?action=product&range=".$range_id."&page=".$nextpage."&ids=".$ids."&order=".$order."'>next page-></a>";
+echo "<a href='".$_SERVER['PHP_SELF']."?page=product&range=".$range_id."&pages=".$nextpage."&ids=".$ids."&order=".$order."'>next page-></a>";
 }
 echo "</div>";
 ?>

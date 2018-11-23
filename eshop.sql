@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主机： 127.0.0.1:3306
--- 生成日期： 2018-11-09 14:18:36
+-- 生成日期： 2018-11-23 20:41:49
 -- 服务器版本： 5.7.23
 -- PHP 版本： 5.6.38
 
@@ -41,33 +41,15 @@ CREATE TABLE IF NOT EXISTS `addresses` (
   `updated` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`address_id`),
   KEY `user_id` (`user_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 --
 -- 转存表中的数据 `addresses`
 --
 
 INSERT INTO `addresses` (`address_id`, `name`, `address1`, `address2`, `code`, `city`, `country`, `user_id`, `updated`) VALUES
-(1, 'aaa', 'aaa', 'aaa', 1111, 'aaa', 'aaa', 1, '2018-11-04 20:47:24'),
-(2, 'bbb', 'bbbb', 'bbbb', 11111, 'bbb', 'bbb', 1, '2018-11-05 13:50:09'),
-(3, 'ccc', 'ccc', 'ccc', 1111, 'ccc', 'ccc', 1, '2018-11-05 14:03:02'),
+(5, 'ccc', 'ccc', 'ccc', 111, '111', '111', 1, '2018-11-23 17:11:57'),
 (4, 'fff', 'ffff', 'ffff', 111, 'fff', 'fff', 1, '2018-11-05 14:09:18');
-
--- --------------------------------------------------------
-
---
--- 表的结构 `cart`
---
-
-DROP TABLE IF EXISTS `cart`;
-CREATE TABLE IF NOT EXISTS `cart` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `produit_id` int(11) NOT NULL,
-  `number` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `updated` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -85,7 +67,7 @@ CREATE TABLE IF NOT EXISTS `links` (
   `updated` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`link_id`),
   KEY `address_id` (`address_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
 
 --
 -- 转存表中的数据 `links`
@@ -97,7 +79,10 @@ INSERT INTO `links` (`link_id`, `order_id`, `produit_id`, `number`, `address_id`
 (11, 4, 1, 3, NULL, '2018-11-05 13:50:57'),
 (13, 5, 1, 4, NULL, '2018-11-09 14:06:06'),
 (14, 6, 2, 2, NULL, '2018-11-09 15:03:37'),
-(15, 6, 7, 1, NULL, '2018-11-09 15:04:21');
+(15, 6, 7, 1, NULL, '2018-11-09 15:04:21'),
+(18, 7, 1, 1, NULL, '2018-11-23 20:59:58'),
+(19, 8, 2, 1, NULL, '2018-11-23 21:16:36'),
+(20, 8, 3, 1, NULL, '2018-11-23 21:16:37');
 
 -- --------------------------------------------------------
 
@@ -117,16 +102,42 @@ CREATE TABLE IF NOT EXISTS `orders` (
   PRIMARY KEY (`order_id`),
   KEY `user_id` (`user_id`),
   KEY `address_id` (`address_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 
 --
 -- 转存表中的数据 `orders`
 --
 
 INSERT INTO `orders` (`order_id`, `user_id`, `type`, `status`, `amount`, `address_id`, `updated`) VALUES
-(7, 1, 'cart', 'cart', NULL, NULL, '2018-11-09 15:04:25'),
-(2, 1, 'order', 'payed', 29.97, 1, '2018-11-04 20:47:32'),
-(6, 1, 'order', 'payed', 19.09, 1, '2018-11-09 14:06:47');
+(9, 1, 'cart', 'cart', NULL, NULL, '2018-11-23 21:16:40'),
+(8, 1, 'order', 'payed', 27.87, 9, '2018-11-23 21:00:02');
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `order_addresses`
+--
+
+DROP TABLE IF EXISTS `order_addresses`;
+CREATE TABLE IF NOT EXISTS `order_addresses` (
+  `address_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `address1` varchar(100) NOT NULL,
+  `address2` varchar(100) DEFAULT NULL,
+  `code` int(11) NOT NULL,
+  `city` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `country` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `order_id` int(11) DEFAULT NULL,
+  `updated` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`address_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+
+--
+-- 转存表中的数据 `order_addresses`
+--
+
+INSERT INTO `order_addresses` (`address_id`, `name`, `address1`, `address2`, `code`, `city`, `country`, `order_id`, `updated`) VALUES
+(9, 'ccc', 'ccc', 'ccc', 111, '111', '111', 8, '2018-11-23 21:18:05');
 
 -- --------------------------------------------------------
 
@@ -153,9 +164,9 @@ CREATE TABLE IF NOT EXISTS `produit` (
 --
 
 INSERT INTO `produit` (`produit_id`, `range_id`, `name`, `number`, `price`, `description`, `img_url`, `updated`) VALUES
-(1, 1, 'moi', 977, 9.99, '11111111', '../image/IMG_5997.jpg', '2018-10-29 17:09:01'),
-(2, 1, 'legocity', 97, 7.88, 'legocity', '../image/LEGO City .jpg', '2018-11-09 13:51:22'),
-(3, 1, 'LEGO Technic', 99, 19.99, 'LEGO Technic', '../image/LEGO Technic.jpg', '2018-11-09 13:51:53'),
+(1, 1, 'moi', 976, 9.99, '11111111', '../image/IMG_5997.jpg', '2018-10-29 17:09:01'),
+(2, 1, 'legocity', 96, 7.88, 'legocity', '../image/LEGO City .jpg', '2018-11-09 13:51:22'),
+(3, 1, 'LEGO Technic', 98, 19.99, 'LEGO Technic', '../image/LEGO Technic.jpg', '2018-11-09 13:51:53'),
 (4, 2, 'Soft Squishy toys', 99, 6.66, 'Soft Squishy toys', '../image/Soft Squishy toys.jpg', '2018-11-09 13:52:14'),
 (5, 1, 'LEGO Technic BMW', 99, 9.99, 'LEGO Technic BMW', '../image/LEGO Technic BMW.jpg', '2018-11-09 13:52:34'),
 (6, 1, 'LEGO Creator', 99, 8.88, 'LEGO Creator', '../image/LEGO Creator.jpg', '2018-11-09 13:52:55'),
@@ -211,7 +222,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 --
 
 INSERT INTO `user` (`user_id`, `username`, `age`, `sex`, `email`, `birthday`, `pwd`, `money`, `updated`) VALUES
-(1, 'aaa', 11, 0, 'aaa@aaa.com', '2018-10-29', '47bce5c74f589f4867dbd57e9ca9f808', 1449.01, '2018-11-04 20:30:17');
+(1, 'aaa', 11, 0, 'aaa@aaa.com', '2018-10-29', '47bce5c74f589f4867dbd57e9ca9f808', 2679.16, '2018-11-04 20:30:17');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

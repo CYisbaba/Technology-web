@@ -1,7 +1,7 @@
 <?php
-if(isset($_GET["submit"])){
+if(isset($_GET["id"])){
 	
-	$order_id = $_GET["submit"];
+	$order_id = $_GET["id"];
 	$amount = $_SESSION["amount"];
 	
 	$sql = "select * from addresses where user_id = '$user_id'";

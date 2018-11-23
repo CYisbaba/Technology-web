@@ -1,20 +1,8 @@
 <div id="content">
 
 <?php 
-if(isset($_SESSION["username"])){
 	
-	include("delete.php");
-	include("cart_submit.php");
-	
-	$user_id = $_SESSION["user_id"];	
 	$order_id = $_SESSION["order_id"];
-	
-	//if(!isset($_COOKIE[$user_id])){
-		
-	//	setcookie($user_id."[user_id]",$user_id, time()+3600*24);
-	//	setcookie($user_id."[order]","", time()+3600*24);
-	//	setcookie($user_id."[ids]","", time()+3600*24);
-	//}
 	
 if(!empty($_SESSION["cart"])){
 	
@@ -25,12 +13,12 @@ if(!empty($_SESSION["cart"])){
 	echo "<div align='center'><table bgcolor=white border='1' width=100%>
 <tr>
 <th></th>
-<th>Name<a href='".htmlentities($_SERVER['PHP_SELF'])."?action=cart&ids=name&order=asc'>↓</a>
-<a href='".htmlentities($_SERVER['PHP_SELF'])."?action=cart&ids=name&order=desc'>↑</a></th>
-<th>Number<a href='".htmlentities($_SERVER['PHP_SELF'])."?action=cart&ids=number&order=asc'>↓</a>
-<a href='".htmlentities($_SERVER['PHP_SELF'])."?action=cart&ids=number&order=desc'>↑</a></th>
-<th>Price<a href='".htmlentities($_SERVER['PHP_SELF'])."?action=cart&ids=price&order=asc'>↓</a>
-<a href='".htmlentities($_SERVER['PHP_SELF'])."?action=cart&ids=price&order=desc'>↑</a></th>
+<th>Name<a href='".htmlentities($_SERVER['PHP_SELF'])."?page=cart&ids=name&order=asc'>↓</a>
+<a href='".htmlentities($_SERVER['PHP_SELF'])."?page=cart&ids=name&order=desc'>↑</a></th>
+<th>Number<a href='".htmlentities($_SERVER['PHP_SELF'])."?page=cart&ids=number&order=asc'>↓</a>
+<a href='".htmlentities($_SERVER['PHP_SELF'])."?page=cart&ids=number&order=desc'>↑</a></th>
+<th>Price<a href='".htmlentities($_SERVER['PHP_SELF'])."?page=cart&ids=price&order=asc'>↓</a>
+<a href='".htmlentities($_SERVER['PHP_SELF'])."?page=cart&ids=price&order=desc'>↑</a></th>
 <th></th>
 </tr>";
 
@@ -91,7 +79,7 @@ if(!empty($_SESSION["cart"])){
 					echo "<td>".$row["name"]."</td>";
 					echo "<td>".$row["number"]."</td>";
 					echo "<td>".$row["price"]."</td>";
-					echo "<td><a text-decoration:none href='".htmlentities($_SERVER['PHP_SELF'])."?action=cart&id=".$cart_id."' onClick='return confirm(`Are you sure?`);'>DELETE</a></td>";
+					echo "<td><a text-decoration:none href='".htmlentities($_SERVER['PHP_SELF'])."?page=cart&action=delete&id=".$cart_id."' onClick='return confirm(`Are you sure?`);'>DELETE</a></td>";
 					echo "</tr>";
 				}
 
@@ -102,7 +90,7 @@ if(!empty($_SESSION["cart"])){
 		<td></td>
 		<td></td>
 		<td>Total price:".$sum."</td>
-		<td><a text-decoration:none href='".htmlentities($_SERVER['PHP_SELF'])."?action=cart&submit=".$order_id."'>SUBMIT</a></td>
+		<td><a text-decoration:none href='".htmlentities($_SERVER['PHP_SELF'])."?page=cart&action=cart_submit&id=".$order_id."'>SUBMIT</a></td>
 		</tr>";
 		
 	echo "</table></div>";
@@ -111,10 +99,10 @@ else{
 	
 echo "No products";
 }
-}
-else{
+//}
+//else{
 	
-	header("location:index.php");	
-}
+//	header("location:index.php");	
+//}
 ?>
 </div>

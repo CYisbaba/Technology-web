@@ -1,6 +1,6 @@
 <div id="content">
 
-<form action="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>?action=inscrire&page=inscrire" method="post">
+<form action="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>?page=inscrire&action=inscrire" method="post">
 Username :<input type="text" name="username" placeholder="Username" id="username" maxlength="20" required oninvalid="setCustomValidity('Please input your name.');" oninput="setCustomValidity('');">
 <BR><BR>
 Age :<input type="number" name="age" placeholder="Age" id="age" min="0" max="100" required oninvalid="setCustomValidity('Please input your age.');" oninput="setCustomValidity('');">

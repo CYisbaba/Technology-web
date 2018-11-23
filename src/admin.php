@@ -4,6 +4,18 @@ session_start();
 
 include("mysqlconfig.php");
 
+//page select
+if(isset($_GET["page"])){
+	
+	$page = $_GET["page"];
+}
+
+//action select
+if(isset($_GET["action"])){
+	
+	$action = $_GET["action"];
+}
+
 //judge authority
 if((!empty($_SESSION["admin"])) && ($_SESSION["admin"] == "admin")){
 	
@@ -73,10 +85,17 @@ description :
 <?php 
 }
 else{	
+	
+	//oder list
+	if(isset($_GET["page"]) && $_GET["page"] == "order_list"){
+	
+		include("order_list.php");
+	}
+	else{
 	?>
 
 <div>
-
+<p><a href="admin.php?page=order_list">Order list</a></p>
 <form action="admin.php" method="post" enctype="multipart/form-data">
 name : <input type="text" name="name" placeholder="Product name" id="name" maxlength="20" required oninvalid="setCustomValidity('Cannot be empty.');" oninput="setCustomValidity('');">
 <BR><BR>
@@ -170,6 +189,7 @@ while($row = $result -> fetch_array()){
 
 echo "</table></div>";
 
+}
 }
 }
 else{

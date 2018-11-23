@@ -1,16 +1,10 @@
-<?php include("addincart.php");?>
-
 <?php
-
-if(isset($_SESSION["username"])){
 	
 $search = $_POST["uname"];
 
-include("mysqlconfig.php");
-
 if (empty($search)){
 	
-	header("location:".htmlentities($_SERVER['PHP_SELF'])."?action=search");
+	header("location:".htmlentities($_SERVER['PHP_SELF'])."?page=search");
 }
 else{
 	
@@ -58,7 +52,7 @@ else{
 <td><?php echo "$number"; ?></td>
 <td><?php echo "$price"; ?></td>
 <td><?php echo "$description"; ?></td>
-<td><a text-decoration:none href="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>?action=product&id=<?php echo "$produit_id"; ?>">Add in cart</a></td>
+<td><a text-decoration:none href="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>?page=product&action=addincart&id=<?php echo "$produit_id"; ?>">Add in cart</a></td>
 </tr>
 </table>
 
@@ -73,11 +67,7 @@ else{
 		echo "<br />";
 		echo "No product";
 		}
-}
-else{
-	
-	header("location:index.php");	
-}
+
 ?>	
 
 </div>
